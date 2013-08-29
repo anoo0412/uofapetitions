@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+		<f:metadata>
+			<f:event listener="#{dean.listofAllPetitions}" type="preRenderView" />
+		</f:metadata>
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/department/deanMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+			<h:panelGroup layout="block" id="deptHomeTable">
+				<p:outputLabel value="Petitions Filed By Students"
+					style="padding-left: 15%; font-size: 20px;" />
+				<p:dataTable value="#{dean.students}" var="deanStud"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15,20">
+
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column headerText="Petition Number"
+								filterBy="#{studPet.petition_Number}" filterMatchMode="contains"
+								sortBy="#{studPet.petition_Number}" />
+							<p:column headerText="Student Id" filterBy="#{deanStud.sid}"
+								filterMatchMode="contains" sortBy="#{deanStud.sid}" />
+							<p:column headerText="First Name"
+								filterBy="#{deanStud.student_Fname}" filterMatchMode="contains"
+								sortBy="#{deanStud.student_Fname}" />
+							<p:column headerText="Last Name"
+								filterBy="#{deanStud.student_LName}" filterMatchMode="contains"
+								sortBy="#{deanStud.student_LName}" />
+							<p:column headerText="College Name"
+								filterBy="#{deanStud.college_name}" filterMatchMode="contains"
+								sortBy="#{deanStud.college_name}" />
+							<p:column headerText="Status" filterBy="#{deanStud.college_name}"
+								filterMatchMode="contains" sortBy="#{deanStud.college_name}" />
+						</p:row>
+					</p:columnGroup>
+
+					<p:subTable var="studPet" value="#{deanStud.studentPetitions}">
+						<p:column>
+							<p:commandLink value="#{studPet.petition_Number}"
+								action="#{dean.viewPetition}">
+								<f:setPropertyActionListener target="#{dean.selectedStudent}"
+									value="#{deanStud}" />
+								<f:setPropertyActionListener
+									target="#{dean.selectedStudentPetition}" value="#{studPet}" />
+							</p:commandLink>
+						</p:column>
+						<p:column>
+							<h:outputText value="#{deanStud.sid}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{deanStud.student_Fname}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{deanStud.student_LName}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{deanStud.college_name}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{studPet.petition_Status}" />
+						</p:column>
+					</p:subTable>
+
+
+				</p:dataTable>
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/student/studentMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:panelGrid>
+
+			<p:outputLabel value=" WHEN FILLING OUT THE GENERAL PETITION FORM:"
+				style="font-weight:bold;" />
+
+
+			<p:outputLabel
+				value=" Current contact information is essential. Please print or write legibly on form. All correspondence to the student is done via email.
+
+ If you a filing a General Petition for Extenuating Circumstances for Medical or Discrimination or Harassment circumstances, see the appropriate form for detailed instructions. When filling out the General Petition form for any other reason, follow the steps below. " />
+
+			<br />
+			<p:outputLabel value="Step 1:" style="font-weight:bold;" />
+			<p:outputLabel
+				value="Undergraduate students may petition the University General Petitions Committee for relief if they believe they deserve redress or exception to University rules, regulations or policies regarding academic affairs.
+
+Choose from the options listed on the form." />
+
+			<br />
+			<p:outputLabel value="Step 2:" style="font-weight:bold;" />
+			<p:outputLabel
+				value="You must attach a clear explanation of your request and your reasons why the Committee should grant you an exception to policy. 
+Generally, the Committee is looking for the following information: 
+
+For a complete retroactive withdrawal from a term.
+Your statement should explain:
+
+Why you stopped attending before the semester ended.
+Why you did not follow the procedure for dropping the course.
+If you attempted to drop past the deadline and your request was denied by your college, why you feel the Committee should now approve your request.
+For retroactive registration for a course taken but not registered for.
+You wish to have a course retroactively added to a past semester. Your statement should explain:
+
+Why you did not follow procedure to register for the course.
+The procedure you did follow to add the course if you believe the course should still be on your schedule. Example: Change of Schedule form, WebReg, etc.
+If you were dropped for non-payment, why you did not take steps to re-register during the semester taken.
+For extension of an incomplete grade that has turned to an E.
+Your statement should explain:
+
+Why you were not able to complete the coursework in the given time for a course where a grade of I-incomplete was awarded.
+For waiver of other University Policy.
+Your statement should:
+
+Briefly state the policy you wish to have waived and why you could not follow this policy or procedure." />
+
+			<br />
+			<p:outputLabel value="Step 3:" style="font-weight:bold;" />
+			<p:outputLabel
+				value="Instructor Statement Form and Additional Documents:"
+				style="font-weight:bold;" />
+			<p:outputLabel
+				value="You will need to attach an Instructor's Statement Form for each of the courses listed in this petition. This form is to be filled out and signed by the instructor. See the form for instructions and call 520-626-5896 if you have any questions.
+
+Attach any further documents which may support your request." />
+
+			<br />
+
+			<p:outputLabel value="Step 4:" style="font-weight:bold;" />
+			<p:outputLabel
+				value="Signature
+Sign form and turn in to location given in this step." />
+
+
+			<br />
+			<p:outputLabel
+				value="The following are not subject to General Petition:
+Cancelled courses  for which you were given a grade. This is an administrative error. See the Office of Registration and Transcripts to have it corrected.
+Courses for which you wish to change from grade type P/F to grade type A, B, C, D, E will not be considered. See the Dean of the college in which you are majoring if you want a P/F course to satisfy a requirement.
+Financial matters: The General Petition process is for academic policy relief. See the Bursar's Office for fall and spring semester requests; for summer and winter session requests, contact the Office of Summer and Winter Sessions.
+Grade appeals: If you are seeking a higher grade in a course than was awarded, and can not resolve the matter with your instructor, you need to follow the Grade Appeal process.
+If you want to extend the time needed to complete an I for a course and the incomplete has not expired, obtain a Petition for Extension of Course Work from your college Dean's office or the Office of Registration and Transcripts.
+Graduate students should consult the Graduate College for information on submitting Graduate Petitions. If the course to be petitioned is an undergraduate course, contact the Office of Registration and Transcripts.
+College Petition: Students may also formally request redress or exception to college policies of requirements. (i.e. change in program, substitution of course work, transfer credit, etc.) This is referred to as a College Petition. Students should consult with their college Dean's office for information on submitting a College Petition.
+ 
+
+ " />
+
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>
+
+
+
+

@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/reviewer/reviewerMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+			<h:panelGroup layout="block" style="padding-left: 30%;">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Student Name" />
+					<p:outputLabel
+						value="#{reviewer.selectedStudent.student_Fname} #{reviewer.selectedStudent.student_LName}" />
+
+					<p:outputLabel value="Student Year" />
+					<p:outputLabel
+						value="#{reviewer.selectedStudentPetition.session_Year}" />
+
+					<p:outputLabel value="Student College" />
+					<p:outputLabel value="#{reviewer.selectedStudent.college_name}" />
+
+					<p:outputLabel value="Semester" />
+					<p:outputLabel
+						value="#{reviewer.selectedStudentPetition.school_Session}" />
+
+					<p:outputLabel value="Session Year" />
+					<p:outputLabel
+						value="#{reviewer.selectedStudentPetition.session_Year}" />
+
+					<p:outputLabel value="Department Approval" />
+					<ui:repeat var="dell"
+						value="#{reviewer.selectedStudentPetition.delegateDecisions}">
+						<p:commandLink value="#{dell.dean_Recommendation}" type="button"
+							onclick="dell.show();" />
+						<p:dialog modal="true" appendToBody="true" widgetVar="dell">
+							<p:panel>
+								<p:outputLabel value="#{dell.comment_Body}" />
+							</p:panel>
+						</p:dialog>
+					</ui:repeat>
+
+					<p:outputLabel value="Petition Type" />
+					<p:outputLabel
+						value="#{reviewer.selectedStudentPetition.petitionType}" />
+
+					<p:outputLabel value="Petition Status" />
+					<p:outputLabel
+						value="#{reviewer.selectedStudentPetition.petition_Status}" />
+
+					<p:outputLabel value="My Decision" />
+					<ui:repeat var="pett"
+						value="#{reviewer.selectedStudentPetition.petitionCommittees}">
+						<p:commandLink value="#{pett.member_Decision}" type="button"
+							onclick="pett.show();" />
+						<p:dialog modal="true" appendToBody="true" widgetVar="pett">
+							<p:panel>
+								<p:outputLabel value="#{pett.commPetitionBody}" />
+							</p:panel>
+						</p:dialog>
+					</ui:repeat>
+
+					<p:outputLabel value="Letter by student:" />
+					<p:commandLink type="button" onclick="letter.show();" value="Link" />
+					<p:outputLabel value="Supporting Documents" />
+					<p:commandLink type="button" onclick="docs.show();"
+						value="Click to view documents" />
+
+
+				</p:panelGrid>
+				<h:panelGroup layout="block" id="buttonNext"
+					style="padding-left: 15%; padding-top: 2%;">
+					<p:commandButton value="Submit Decision"
+						action="/reviewer/reviewerAppr.xhtml?faces-redirect=true" />
+				</h:panelGroup>
+			</h:panelGroup>
+
+			<p:dialog modal="true" appendToBody="true" widgetVar="letter">
+				<p:panel> 
+						<p:outputLabel value="#{reviewer.selectedStudentPetition.petitionHeader}"/>
+					</p:panel>
+					<p:panel> 
+						<p:outputLabel value="#{reviewer.selectedStudentPetition.petition_Details}"/>
+					</p:panel>
+			</p:dialog>
+
+			<p:dialog modal="true" appendToBody="true" widgetVar="docs"
+				header="Download">
+				<p:panel style="text-align: center;">
+					<p:outputLabel
+						value="Below are the list of documents submitted by the students.
+						" />
+					<br />
+					<h:outputText value="Please click on the file to download it." />
+				</p:panel>
+				<ui:repeat var="revdocii" value="#{reviewer.streams}">
+					<p:panelGrid columns="1"
+						style="margin-left:12%;width: 70%;text-align: center; padding-left: 50%;">
+
+						<p:commandLink id="downloadLink" value="#{revdocii.name}"
+							ajax="false" style="font-size: 15px;">
+							<p:fileDownload value="#{revdocii}" />
+						</p:commandLink>
+					</p:panelGrid>
+				</ui:repeat>
+			</p:dialog>
+
+			<p:dialog modal="true" appendToBody="true" widgetVar="letter">
+				<p:panel>
+					<p:outputLabel
+						value="#{reviewer.selectedStudentPetition.petitionHeader}" />
+				</p:panel>
+				<p:panel>
+					<p:outputLabel
+						value="#{reviewer.selectedStudentPetition.petition_Details}" />
+				</p:panel>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

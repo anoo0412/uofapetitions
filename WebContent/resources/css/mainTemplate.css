@@ -1,0 +1,58 @@
+.headerImg {
+	height: 80;
+}
+
+.footerCls {
+	position: fixed;
+	bottom: 0px;
+	padding-left: 50%;
+	width: 100%;
+	color: white;
+	background-color: #002147;
+}
+
+.headerLbl {
+	font-size: 45px;
+	padding-left: 40px;
+}
+
+.petitionLink {
+	width: 25%;
+	margin-left: 40%;
+	text-align: center;
+	margin-bottom: 1%;
+}
+
+.studentMenu {
+	
+}
+
+.studentFormCls {
+	margin-left: 30%;
+}
+
+.studentMenuCls {
+	width: 100%;
+}
+
+.studentMenuCls div,.studentMenuCls ul,.studentMenuCls ul li:HOVER {
+	background-color: white !important;
+}
+
+.studentStmtCls {
+	width: 100%;
+}
+
+.main_body {
+	position: absolute;
+	height: 80%;
+	width: 80%;
+	top: 10%;
+	left: 10%;
+	background-color: #FFD18B;
+}
+
+.bodyCls
+{
+	background-color: green;	
+}

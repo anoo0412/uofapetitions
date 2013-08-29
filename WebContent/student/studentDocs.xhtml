@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/student/student.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/student/studentMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false" enctype="multipart/form-data">
+			<p:growl id="messages" />
+			<h:panelGrid columns="1" styleClass="studentStmtCls">
+				<p:outputLabel value="Please upload the relevant documents"
+					style="text-align:center; padding-left: 35%" />
+				<p:separator style="height:3px;" />
+				<h:panelGrid layout="block" id="fileUpload"
+					style="margin-left: 10%; width: 80%">
+					<p:fileUpload fileUploadListener="#{student.handleFileUpload}"
+						mode="advanced" update="@form" multiple="single"
+						sizeLimit="100000"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx?)$/" />
+				</h:panelGrid>
+			</h:panelGrid>
+			<h:panelGroup layout="block" id="buttonPanel" style="padding-left: 38%; padding-top: 1%;">
+			<p:commandButton
+				action="/student/studentPersonalStatement.xhtml?faces-redirect=true"
+				value="Previous Page" style="width: 180px;"/>
+				<p:commandButton
+				value="Submit Petition" style="width: 180px;"/>
+</h:panelGroup>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

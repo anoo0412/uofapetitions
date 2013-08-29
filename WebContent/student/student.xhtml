@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+			<ui:define name="menu">
+				<ui:include src="/student/studentMenu.xhtml" />
+			</ui:define>
+			<ui:define name="body">
+
+				<h:form prependId="false">
+				
+				<p:growl autoUpdate="true" id="messageGrowl"/>
+					<h:panelGroup styleClass="studentMenu" id="studentmenu">
+						<p:panel id="createPetition" styleClass="petitionLink"
+							style="margin-top: 10%">
+							<p:commandLink value="Create New Petition"
+								action="#{student.goToForm}" />
+						</p:panel>
+
+						<p:panel id="checkStatus" styleClass="petitionLink">
+							<p:commandLink value="Check Petition Status / Edit Petition"
+								action="#{student.loadStudentPetitions}" />
+						</p:panel>
+					</h:panelGroup>
+				</h:form>
+
+			</ui:define>
+
+
+<style type="text/css">
+#mainBodyCls {
+	background-color: rgb(233, 231, 216);
+	height: 100%;
+	width: 100%;
+}
+
+#bodyCls {
+	height: 100%;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+</style>
+</ui:composition>

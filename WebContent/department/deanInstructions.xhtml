@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/mainTemplate.xhtml">
+<h:head>
+</h:head>
+
+<ui:define name="menu">
+	<ui:include src="/department/deanMenu.xhtml" />
+</ui:define>
+<ui:define name="body">
+<h:form>
+
+<h:panelGrid style="padding-left: 30%;">
+	<p:outputLabel value="Step 1:"  style="font-weight:bold;"/>
+	<p:outputLabel value="Click on the petition that needs review"/>
+	<p:outputLabel value="Step 2:"  style="font-weight:bold;"/>
+	<p:outputLabel value="Ensure that relevant supporting documents are present"/>
+	<p:outputLabel value="Step 3:"  style="font-weight:bold;"/>
+	<p:outputLabel value="Evalaute the student's petition request letter"/>
+	<p:outputLabel value="Step 4:"  style="font-weight:bold;"/>
+	<p:outputLabel value="Review the supporting letter by the faculty member"/>
+	<p:outputLabel value="Step 5:"  style="font-weight:bold;"/>
+	<p:outputLabel value="Assess all supporting documents and evaluate the validity of the petition"/>
+	<p:outputLabel value="Step 6:"  style="font-weight:bold;"/>
+	<p:outputLabel value="Submit decision"/>
+	
+</h:panelGrid>
+</h:form>
+</ui:define>
+</ui:composition>

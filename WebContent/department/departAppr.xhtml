@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/mainTemplate.xhtml">
+<h:head>
+	<h:outputStylesheet library="css" name="student.css"/>
+</h:head>
+<ui:define name="menu">
+	<ui:include src="/department/deanMenu.xhtml" />
+</ui:define>
+<ui:define name="body">
+	<h:form prependId="false" enctype="">
+	<p:messages autoUpdate="true"/>
+			<h:panelGrid columns="1" styleClass="studentStmtCls">
+			<h:panelGroup layout="block" id="formHeader" styleClass="headerCls1">
+				<p:outputLabel value="Please enter the decision subject and decision comments below"
+					style="text-align:center; padding-left: 25%" />
+				</h:panelGroup>
+				<p:separator style="height:3px;" />
+				<h:panelGroup layout="block" id="msgBlck">
+				</h:panelGroup>
+				<h:panelGrid layout="block" style="margin-left: 20%;">
+					<h:inputTextarea style="width: 800px; height: 300px;" id="petitionContent" title="Petition Proposal"
+					maxlength="2000" required="true" requiredMessage="Please enter your personal statement"
+					value="#{dean.decision.comment_Body}"/>
+				</h:panelGrid>
+				<h:panelGrid columns="2"  style="margin-left: 40%;">
+					<p:outputLabel value="Verdict"/>
+					<p:selectOneRadio value="#{dean.decision.dean_Recommendation}">
+						<f:selectItem itemLabel="Approved" itemValue="Approved"/>
+						<f:selectItem itemLabel="Denied" itemValue="Denied"/>
+					</p:selectOneRadio>
+				</h:panelGrid>
+			</h:panelGrid>
+			<p:commandButton value="Submit Decision"  style="margin-left: 40%;margin-top: 1%;"
+			action="#{dean.submitDeptDecision}"/> 
+		</h:form>	
+<style type="text/css">
+.headerCls1 {
+	height: 25px;
+	font-size: 25px;
+	font-family: Gill Sans MT;
+}
+</style>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+		<f:metadata>
+			<f:event listener="#{reviewer.listAllPetitions}" type="preRenderView" />
+		</f:metadata>
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/reviewer/reviewerMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<h:panelGroup layout="block" id="reviewerHomeTable">
+				<p:outputLabel value="Petitions Filed By Students"
+					style="padding-left: 15%; font-size: 20px;" />
+				<p:dataTable value="#{reviewer.students}" var="revStud"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15,20">
+
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column headerText="Petition Number"
+								filterBy="#{revStudPet.petition_Number}"
+								filterMatchMode="contains"
+								sortBy="#{revStudPet.petition_Number}" />
+							<p:column headerText="Student Id" filterBy="#{revStud.sid}"
+								filterMatchMode="contains" sortBy="#{revStud.sid}" />
+							<p:column headerText="First Name"
+								filterBy="#{revStud.student_Fname}" filterMatchMode="contains"
+								sortBy="#{revStud.student_Fname}" />
+							<p:column headerText="Last Name"
+								filterBy="#{revStud.student_LName}" filterMatchMode="contains"
+								sortBy="#{revStud.student_LName}" />
+							<p:column headerText="College Name"
+								filterBy="#{revStud.college_name}" filterMatchMode="contains"
+								sortBy="#{revStud.college_name}" />
+							<p:column headerText="Status" filterBy="#{revStud.college_name}"
+								filterMatchMode="contains" sortBy="#{revStud.college_name}" />
+						</p:row>
+					</p:columnGroup>
+
+					<p:subTable var="revStudPet" value="#{revStud.studentPetitions}">
+						<p:column>
+							<p:commandLink value="#{revStudPet.petition_Number}" action="#{reviewer.goToReviewerDecision}">
+								<f:setPropertyActionListener
+									target="#{reviewer.selectedStudent}" value="#{revStud}" />
+								<f:setPropertyActionListener
+									target="#{reviewer.selectedStudentPetition}"
+									value="#{revStudPet}" />
+							</p:commandLink>
+						</p:column>
+						<p:column>
+							<h:outputText value="#{revStud.sid}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{revStud.student_Fname}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{revStud.student_LName}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{revStud.college_name}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{revStudPet.petition_Status}" />
+						</p:column>
+					</p:subTable>
+
+
+				</p:dataTable>
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/mainTemplate.xhtml">
+<h:head>
+	<h:outputStylesheet library="css" name="student.css"/>
+</h:head>
+<ui:define name="menu">
+	<ui:include src="/reviewer/reviewerMenu.xhtml" />
+</ui:define>
+<ui:define name="body">
+<h:form>
+	<h:form prependId="false">
+		<p:messages id="messageBlck" autoUpdate="true"/>
+			<h:panelGrid columns="1" styleClass="studentStmtCls">
+				<p:outputLabel value="Please enter the decision subject and decision comments below"
+					style="text-align:center; padding-left: 35%" />
+				<p:separator style="height:3px;" />
+				<h:panelGrid layout="block" style="margin-left: 20%;">
+					<h:inputTextarea style="width: 800px; height: 300px;" id="petitionContent" title="Petition Proposal"
+					maxlength="2000" value="#{reviewer.reviewerDecision.commPetitionBody}"/>
+				</h:panelGrid>
+				<h:panelGrid columns="2"  style="margin-left: 40%;">
+					<p:outputLabel value="Verdict"/>
+					<p:selectOneRadio value="#{reviewer.reviewerDecision.member_Decision}">
+						<f:selectItem itemLabel="Approved" itemValue="Approved"/>
+						<f:selectItem itemLabel="Denied" itemValue="Denied"/>
+					</p:selectOneRadio>
+				</h:panelGrid>
+			</h:panelGrid>
+			<p:commandButton value="Submit Decision"  style="margin-left: 40%;margin-top: 1%;"
+			 action="#{reviewer.submitReviewerDecision}" ajax="false"/> 
+		</h:form>	
+</h:form>
+</ui:define>
+</ui:composition>

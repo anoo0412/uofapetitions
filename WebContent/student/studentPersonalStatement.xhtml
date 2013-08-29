@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/student/student.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/student/studentMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false" enctype="multipart/form-data">
+		<p:messages autoUpdate="true"/>
+			<h:panelGrid columns="1" styleClass="studentStmtCls">
+				<h:panelGroup layout="block" id="formHeader" styleClass="headerCls1">
+					<p:outputLabel value="Please enter your personal statement here"
+						style="text-align:center; padding-left: 35%" />
+				</h:panelGroup>
+				<p:separator style="height:3px;" />
+				<h:panelGrid layout="block" style="margin-left: 20%;">
+					<h:inputText style="width: 800px;" id="subjectLine"
+						title="Subject Line" maxlength="50"
+						value="#{student.studentPetition.petitionHeader}" />
+					<p:watermark for="subjectLine" value="Please enter subject line" />
+					<h:inputTextarea style="width: 800px; height: 300px; resize: none;"
+						id="petitionContent" title="Petition Proposal" maxlength="2000"
+						value="#{student.studentPetition.petition_Details}" />
+					<p:watermark for="petitionContent"
+						value="Please enter petition summary here" />
+				</h:panelGrid>
+			</h:panelGrid>
+			<h:panelGrid columns="1" styleClass="studentStmtCls">
+				
+				<p:separator style="height:3px;" />
+				<p:outputLabel value="Please upload the relevant documents and Read the instructions before upload"
+					style="text-align:center; padding-left: 25%; font-weight: bold;" />
+				
+				<p:outputLabel value="Please upload your transcript(s) as a .jpg, .png, ., .gif, .docx image"  style="float: left; text-align:center; padding-left: 25%" />
+				<p:outputLabel value="Please upload any other supporting documents in the space provided"  style="float: left; text-align:center; padding-left: 25%" />
+				<p:outputLabel value="Please ensure that the size of your files do not exceed 200kb"  style="float: left; text-align:center; padding-left: 25%" />
+				<p:outputLabel value="Please note that the 'Session' and 'Year' attributes refer to the semester and year for which you are raising a petition and NOT your current school year"  style="float: left; text-align:center; padding-left: 25%" />
+				<h:panelGrid layout="block" id="fileUpload"
+					style="margin-left: 10%; width: 50%" columns="2">
+					<p:fileUpload fileUploadListener="#{student.handleFileUpload}"
+						mode="advanced" multiple="single"
+						sizeLimit="100000"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|docx?)$/"/>
+				</h:panelGrid>
+			</h:panelGrid>
+			<h:panelGroup layout="block" id="buttonPanel"
+				style="padding-left: 38%; padding-top: 1%;">
+					<p:commandButton value="Submit Petition"
+						action="#{student.enterStudentPetitionDetails}"
+						style="width: 180px;" />
+			</h:panelGroup>
+		</h:form>
+		<style type="text/css">
+.headerCls1 {
+	height: 25px;
+	font-size: 25px;
+	font-family: Gill Sans MT;
+}
+</style>
+	</ui:define>
+</ui:composition>

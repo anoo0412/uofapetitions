@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/student/student.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/student/studentMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+		<h:panelGrid>
+			<h:panelGrid columns="2" styleClass="studentFormCls">
+				<p:outputLabel value="Name" />
+				<p:inputText />
+
+				<p:outputLabel value="StudentID" />
+				<p:inputText />
+
+				<p:outputLabel value="Email" />
+				<p:inputText />
+
+				<p:outputLabel value="Phone" />
+				<p:inputText />
+
+				<p:outputLabel value="College" />
+				<p:inputText />
+
+				<p:outputLabel value="Major" />
+				<p:inputText />
+
+				<p:outputLabel value="Address" />
+				<p:inputTextarea />
+
+				<p:outputLabel value="City" />
+				<p:inputText />
+
+				<p:outputLabel value="State" />
+				<p:inputText />
+
+				<p:outputLabel value="Zip" />
+				<p:inputText />
+
+
+
+
+				<p:outputLabel value="Request (Select only ONE)" />
+				<p:selectOneMenu>
+					<f:selectItems value="#{student.requestTypes}"
+						itemLabel="#{student.requestTypes}" />
+				</p:selectOneMenu>
+
+
+
+				<p:outputLabel value="Semester (Select only ONE)" />
+
+				<p:selectOneMenu>
+					<f:selectItems value="#{student.semester}"
+						itemLabel="#{student.semester}" />
+				</p:selectOneMenu>
+				
+				
+				
+			</h:panelGrid>
+			
+			<p:outputLabel value="Please enter your personal statement here"
+					style="text-align:center; padding-left: 35%" />
+				<p:separator style="height:3px;" />
+				<h:panelGrid layout="block" style="margin-left: 20%;">
+					<p:inputText style="width: 800px;" id="subjectLine" title="Subject Line" maxlength="100"/>
+					<p:inputTextarea style="width: 800px; height: 300px;" id="petitionContent" title="Petition Proposal"
+					maxlength="2000"/>
+				</h:panelGrid>
+				
+				<p:commandButton value="Update Petition"/>
+			
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

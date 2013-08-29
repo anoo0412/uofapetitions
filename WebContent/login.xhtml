@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="mainTemplate.css" />
+</h:head>
+<h:body styleClass="main_body1">
+	<h:form prependId="false">
+		<p:graphicImage library="images" name="blue_banner.jpg"
+			style="width: 100%; height: 10%;" />
+		<h:panelGroup styleClass="login_body" layout="block">
+			<h:panelGroup layout="block" id="header">
+
+				<h:panelGroup layout="block" styleClass="headerCls">
+					<h:outputLabel value="Undergraduate Petitions" />
+				</h:panelGroup>
+			</h:panelGroup>
+			<p:messages id="messageId" />
+			<h:panelGroup layout="block" id="formId">
+				<h:outputLabel value="Please enter login details" styleClass="loginDtlsCls"/>
+				<h:panelGrid columns="2" styleClass="tblCls">
+					<p:outputLabel value="User Name" />
+					<h:inputText value="#{login.loginField.loginName}" maxlength="20"
+						required="true" requiredMessage="Please enter user name">
+					</h:inputText>
+
+					<p:outputLabel value="Password" />
+					<h:inputSecret value="#{login.loginField.loginPassword}"
+						maxlength="20" required="true"
+						requiredMessage="Please enter password" />
+
+				</h:panelGrid>
+				<h:panelGroup layout="block" id="btnBlck">
+					<p:commandButton value="Login" update="messageId"
+						action="#{login.validateUser()}" />
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+		<h:panelGroup layout="block" styleClass="footer">
+			<p:outputLabel value="The University of Arizona"/>
+			<br/>
+			<p:outputLabel value="This website is maintained by the Office of Registrar and the Student Affairs System Group."
+			style="font-size: 14px;"/>
+		</h:panelGroup>
+	</h:form>
+</h:body>
+<style type="text/css">
+.main_body1 {
+	height: 100% !important;
+	width: 100%;
+	background-color: rgb(233, 231, 216);
+}
+
+.login_body {
+	background-color: white;
+	text-align: center;
+	width: 80%;
+	margin-left: 10%;
+	right: 20%;
+	height: 90%;
+	border-color: #A3664D;
+}
+
+.headerCls {
+	background-image: url('resources/images/Slide1.jpg');
+	height: 20%;
+	font-size: 55px;
+	color: white;
+}
+
+#formId {
+	width: 30%;
+	height: 50%;
+	margin-left: 30%;
+	margin-top: 10%;
+	text-align: center;
+}
+
+#btnBlck {
+	margin-left: 10%;
+}
+
+.tblCls {
+	width: 100%;
+	height: 10%;
+	border-color: black;
+	border-width: 2px;
+	font-family: calibri;
+	padding-top: 15px;
+}
+.loginDtlsCls
+{
+	height: 20%;
+	font-size: 30px;
+	font-family: calibri;
+}
+.footer
+{
+	text-align: center;
+	color: white;
+	background-color: #002147;
+}
+</style>
+</html>

@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/student/student.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/student/studentMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<h:panelGrid columns="1" styleClass="studentStmtCls">
+				<p:outputLabel value="Please enter your personal statement here"
+					style="text-align:center; padding-left: 35%" />
+				<p:separator style="height:3px;" />
+				<h:panelGrid layout="block" style="margin-left: 20%;">
+					<p:inputText style="width: 800px;" id="subjectLine" title="Subject Line" maxlength="100"/>
+					<p:inputTextarea style="width: 800px; height: 300px;" id="petitionContent" title="Petition Proposal"
+					maxlength="2000"/>
+				</h:panelGrid>
+			</h:panelGrid>
+			<p:commandButton value="Next Page" action="/student/studentDocs.xhtml"/> 
+		</h:form>
+
+	</ui:define>
+</ui:composition>

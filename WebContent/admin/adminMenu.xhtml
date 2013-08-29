@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="mainTemplate.css"/>
+</h:head>
+<h:form prependId="false" id="adminMenu">
+
+		<h:panelGrid styleClass="studentMenuCls">
+			<p:menubar>
+				<p:menuitem label="Home" value="Home" action="#{admin.goToAdminHome}"/>
+			
+				<!-- <p:submenu label="Options">
+					<p:menuitem label="View Petitions" value="View Petitions"/>
+					<p:menuitem label="View Status" value="View Status"/>
+					<p:menuitem label="View Void Petitions" value="View Void Petitions" action ="/admin/adminViewVoidPetitions.xhtml?faces-direct=true"/>
+					<p:menuitem label="Assign Reviewers" value="Assign Reviewers" action= "/admin/adminAssignReviewers.xhtml?faces-direct=true"/>
+					<p:menuitem label="Archive Petitions" value="Archive Petitions" action="/admin/archivePetitions.xhtml?faces-direct=true"/>
+				</p:submenu>  --> 
+				
+				<p:menuitem label="Instructions" action="/admin/adminInstructions.xhtml?faces-redirect=true" 
+				value="Instructions"/>
+			
+			</p:menubar>
+		
+		</h:panelGrid>
+
+
+</h:form>
+
+</html>

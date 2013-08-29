@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="mainTemplate.css"/>
+</h:head>
+<h:form prependId="false" id="deanMenu">
+
+		<h:panelGrid styleClass="studentMenuCls">
+			<p:menubar>
+				<p:menuitem label="Home" value="Home" action="/department/deptHome.xhtml?faces-direct=true"/>
+			
+				<!-- <p:submenu label="Options">
+					<p:menuitem label="Review Petition" value="Review Petition"/>
+					<p:menuitem label="View Status" value="View Status" action="#{dean.goToViewStatus}"/>
+				</p:submenu>   -->
+				
+				<p:menuitem label="Instructions" action="/department/deanInstructions.xhtml?faces-redirect=true" 
+				value="Instructions"/>
+			
+			</p:menubar>
+		
+		</h:panelGrid>
+
+
+</h:form>
+
+</html>

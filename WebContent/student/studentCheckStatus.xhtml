@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/student/student.xhtml">
+	<h:head>
+		<h:outputStylesheet library="css" name="student.css" />
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/student/studentMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:dataTable value="#{student.checkStatusStudent.studentPetitions}"
+				var="stud">
+				<p:column filterBy="#{stud.petition_Number}"
+					filterMatchMode="contains" sortBy="#{stud.petition_Number}"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15,20">
+					<f:facet name="header">
+						<h:outputText value="Petition Number" />
+					</f:facet>
+					<p:commandLink value="#{stud.petition_Number}"
+						action="#{student.editStudentPetition}">
+						<f:setPropertyActionListener
+							target="#{student.editedStudentPetition}" value="#{stud}" />
+					</p:commandLink>
+				</p:column>
+
+				<p:column filterBy="#{stud.petitionHeader}"
+					filterMatchMode="contains" sortBy="#{stud.petitionHeader}">
+					<f:facet name="header">
+						<h:outputText value="Petition Header" />
+					</f:facet>
+					<h:outputText value="#{stud.petitionHeader}" />
+				</p:column>
+
+				<p:column filterBy="#{stud.orig_Petition_Date}"
+					filterMatchMode="contains" sortBy="#{stud.orig_Petition_Date}">
+					<f:facet name="header">
+						<h:outputText value="Petition Created Date" />
+					</f:facet>
+					<h:outputText value="#{stud.orig_Petition_Date}" />
+				</p:column>
+
+				<p:column filterBy="#{stud.petition_Status}"
+					filterMatchMode="contains" sortBy="#{stud.petition_Status}">
+					<f:facet name="header">
+						<h:outputText value="Petition Status" />
+					</f:facet>
+					<h:outputText value="#{stud.petition_Status}" />
+				</p:column>
+			</p:dataTable>
+
+			<p:panel style="margin-top: 1%;">
+				<p:outputLabel
+					value="* To edit your petition click on the particular petition number" />
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

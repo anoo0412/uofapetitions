@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/student/studentMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form style="height: 120%" prependId="false">
+		<p:messages id="msgBlk"/>
+			<h:panelGroup layout="block" id="formHeader" styleClass="headerCls1">
+				<p:outputLabel value="Please enter your personal details" />
+			</h:panelGroup>
+			<p:panelGrid columns="2" styleClass="studentFormCls">
+				<p:outputLabel value="First Name" />
+				<h:inputText value="#{student.student1.student_Fname}"
+					maxlength="20" required="true"
+					requiredMessage="Please enter First name" />
+
+				<p:outputLabel value="Last Name" />
+				<h:inputText value="#{student.student1.student_LName}"
+					maxlength="20" required="true"
+					requiredMessage="Please enter Last name" />
+
+				<p:outputLabel value="Email" />
+				<h:inputText value="#{student.student1.student_emailId}"
+					maxlength="40" required="true"
+					requiredMessage="Please enter email Id" />
+
+				<p:outputLabel value="Phone" />
+				<h:inputText value="#{student.student1.student_phone}"
+					maxlength="20" required="true"
+					requiredMessage="Please enter phone number" />
+
+				<p:outputLabel value="College" />
+				<p:selectOneMenu value="#{student.student1.college_id}"
+					required="true" requiredMessage="Please select College">
+					<f:selectItem itemLabel="Select College" />
+					<f:selectItems value="#{student.colleges}" var="col"
+						itemLabel="#{col.college_Name}" itemValue="#{col.college_ID}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Major" />
+				<h:inputText value="#{student.student1.student_Major}"
+					maxlength="20" required="true"
+					requiredMessage="Please enter Major" />
+
+				<p:outputLabel value="Address"/>
+				<h:inputTextarea value="#{student.student1.student_address}"
+					maxlength="200" style="resize: none;"  required="true"
+					requiredMessage="Please enter Address" />
+
+				<p:outputLabel value="City" />
+				<h:inputText value="#{student.student1.student_city}" maxlength="20" required="true"
+					requiredMessage="Please enter city" />
+
+				<p:outputLabel value="State" />
+				<p:selectOneMenu value="#{student.student1.student_state}"
+					required="true" requiredMessage="Please select state">
+					<f:selectItem itemLabel="--State--" />
+					<f:selectItems value="#{student.states}" var="st" itemLabel="#{st}"
+						itemValue="#{st}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Zip" />
+				<h:inputText value="#{student.student1.student_zip}" maxlength="20"
+					required="true" requiredMessage="Please enter zip" />
+
+				<p:outputLabel value="Petition Type"  />
+				<p:selectOneMenu value="#{student.studentPetition.petition_ID}" required="true"
+					requiredMessage="Please select petition type">
+					<f:selectItem itemLabel="Select Petition" />
+					<f:selectItems value="#{student.requestTypes}" var="req"
+						itemLabel="#{req.petition_Name}" itemValue="#{req.petition_ID}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="School Session" />
+				<p:selectOneMenu value="#{student.studentPetition.school_Session}" required="true"
+					requiredMessage="Please select school session">
+					<f:selectItem itemLabel="Select School Session" />
+					<f:selectItems value="#{student.semester}" var="sem"
+						itemLabel="#{sem.schoolSession}" itemValue="#{sem.schoolSession}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="School Year" />
+				<h:inputText value="#{student.studentPetition.session_Year}"
+					maxlength="20" required="true"
+					requiredMessage="Please enter session year"/>
+			</p:panelGrid>
+			<p:commandButton
+				action="#{student.validateStudentInfo}"
+				value="Next Page" update="@form" ajax="false"
+				style="margin-left: 45%; margin-top: 2%; width: 180px;" />
+		</h:form>
+
+		<style type="text/css">
+.headerCls1 {
+	height: 50px;
+	text-align: center;
+	font-size: 25px;
+	font-family: Gill Sans MT;
+}
+</style>
+	</ui:define>
+</ui:composition>

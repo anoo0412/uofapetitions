@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/admin/adminMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<p:messages id="messageBlock" />
+			<h:panelGroup layout="block">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Student Name" />
+					<p:outputLabel
+						value="#{admin.selectedStudent.student_Fname} #{admin.selectedStudent.student_LName}" />
+					<p:outputLabel value="Student Year" />
+					<p:outputLabel
+						value="#{admin.selectedStudentPetition.session_Year}" />
+
+					<p:outputLabel value="Student College" />
+					<p:outputLabel value="#{admin.selectedStudent.college_name}" />
+					<p:outputLabel value="Semester" />
+					<p:outputLabel
+						value="#{admin.selectedStudentPetition.school_Session}" />
+
+					<p:outputLabel value="Session Year" />
+					<p:outputLabel
+						value="#{admin.selectedStudentPetition.session_Year}" />
+
+					<p:outputLabel value="Department Approval" />
+					<ui:repeat var="dea"
+						value="#{admin.selectedStudentPetition.delegateDecisions}">
+						<p:commandLink value="#{dea.dean_Recommendation}" type="button"
+							onclick="deptRecommendation.show();" />
+						<p:dialog widgetVar="deptRecommendation"
+							header="Department Comments" modal="true">
+							<p:outputLabel value="#{dea.comment_Body}" />
+							<p:commandButton type="button" value="Close"
+								onclick="deptRecommendation.hide();" />
+						</p:dialog>
+					</ui:repeat>
+
+					<p:outputLabel value="Petition Type" />
+					<p:outputLabel
+						value="#{admin.selectedStudentPetition.petitionType}" />
+
+					<p:outputLabel value="Petition Status" />
+					<p:outputLabel
+						value="#{admin.selectedStudentPetition.petition_Status}" />
+
+					<p:outputLabel value="Letter by student:" />
+					<p:commandLink type="button" onclick="letter.show();" value="Click to Open" />
+					<p:outputLabel value="Supporting Documents" />
+					<p:commandLink type="button" onclick="docs.show();"
+						value="Click to view documents" />
+
+
+				</p:panelGrid>
+				<p:fieldset legend="Decision Status" style="width: 30%;">
+					<p:dataTable
+						value="#{admin.selectedStudentPetition.petitionCommittees}"
+						var="pet" id="assignedReviewers">
+						<p:column headerText="Reviewer Name">
+							<h:outputText value="#{pet.fname} #{pet.lname}" />
+						</p:column>
+						<p:column headerText="Reviewer Decision">
+							<h:outputText value="#{pet.member_Decision}" />
+						</p:column>
+						<p:column headerText="View Comments">
+							<p:commandLink value="View Comments Here" type="button"
+								id="commentId" onclick="commentDialog.show();" rendered="#{pet.member_Decision ne null}"/>
+							<p:dialog id="panel" widgetVar="commentDialog" hideEffect="fade"
+								modal="true" appendToBody="true"
+								header="Comments">
+								<p:panel style="width: 80%;">
+									<p:outputLabel value="Decision Approved" />
+								</p:panel>
+
+								<h:panelGroup layout="block"
+									style="width: 100%; text-align: center;">
+									<p:commandButton type="button" value="Close"
+										onclick="commentDialog.hide();" />
+								</h:panelGroup>
+							</p:dialog>
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+
+				<h:panelGroup layout="block" id="buttonNext" style="width: 35%">
+
+					<p:panel>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Reviewers" />
+							<p:selectManyMenu value="#{admin.selectedReviewers}">
+								<f:selectItems value="#{admin.committee_Members}" var="comm"
+									itemLabel="#{comm.member_FName} #{comm.member_LName}"
+									itemValue="#{comm.committee_Emp_ID}" />
+							</p:selectManyMenu>
+						</h:panelGrid>
+						<p:commandButton value="Assign" action="#{admin.assignReviewer()}"
+							update="@form" />
+					</p:panel>
+
+				</h:panelGroup>
+				<p:commandButton value="Submit Final Decision"
+					action="#{admin.goToPetitionDecision}" />
+			</h:panelGroup>
+
+			<p:dialog modal="true" appendToBody="true" widgetVar="docs"
+				header="Download">
+				<p:panel style="text-align: center;">
+					<p:outputLabel
+						value="Below are the list of documents submitted by the students.
+						" />
+						<br/>
+						<h:outputText value="Please click on the file to download it." />
+				</p:panel>
+				<ui:repeat var="admindocii" value="#{admin.streams}" >
+					<p:panelGrid columns="1" style="margin-left:12%;width: 70%;text-align: center; padding-left: 50%;">
+
+						<p:commandLink id="downloadLink" value="#{admindocii.name}"
+							ajax="false" style="font-size: 15px;">
+							<p:fileDownload value="#{admindocii}" />
+						</p:commandLink>
+					</p:panelGrid>
+				</ui:repeat>
+
+			</p:dialog>
+			
+			<p:dialog modal="true" appendToBody="true" widgetVar="letter">
+					<p:panel> 
+						<p:outputLabel value="#{admin.selectedStudentPetition.petitionHeader}"/>
+					</p:panel>
+					<p:panel> 
+						<p:outputLabel value="#{admin.selectedStudentPetition.petition_Details}"/>
+					</p:panel>
+				</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

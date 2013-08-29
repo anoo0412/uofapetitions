@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/mainTemplate.xhtml">
+	<h:head>
+		<f:metadata>
+			<f:event listener="#{admin.listCollegePetitons}" type="preRenderView" />
+		</f:metadata>
+	</h:head>
+	<ui:define name="menu">
+		<ui:include src="/admin/adminMenu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form prependId="false">
+			 <p:growl id="growl" showDetail="true" sticky="true" /> 
+			 <p:messages autoUpdate="true"/>
+			<p:dataTable value="#{admin.students}" var="adminStud"
+				paginator="true" rows="10"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,20">
+
+				<p:columnGroup type="header">
+					<p:row>
+						<p:column headerText="Petition Number"
+							filterBy="#{studPeti.petition_Number}" filterMatchMode="contains"
+							sortBy="#{studPeti.petition_Number}" />
+						<p:column headerText="Student Id" filterBy="#{adminStud.sid}"
+							filterMatchMode="contains" sortBy="#{adminStud.sid}" />
+						<p:column headerText="First Name"
+							filterBy="#{adminStud.student_Fname}" filterMatchMode="contains"
+							sortBy="#{adminStud.student_Fname}" />
+						<p:column headerText="Last Name"
+							filterBy="#{adminStud.student_LName}" filterMatchMode="contains"
+							sortBy="#{adminStud.student_LName}" />
+						<p:column headerText="College Name"
+							filterBy="#{adminStud.college_name}" filterMatchMode="contains"
+							sortBy="#{adminStud.college_name}" />
+						<p:column headerText="Status" filterBy="#{adminStud.college_name}"
+							filterMatchMode="contains" sortBy="#{adminStud.college_name}" />
+					</p:row>
+				</p:columnGroup>
+
+				<p:subTable var="studPeti" value="#{adminStud.studentPetitions}">
+					<p:column>
+						<p:commandLink value="#{studPeti.petition_Number}"
+							action="#{admin.viewPetition}">
+							<f:setPropertyActionListener target="#{admin.selectedStudent}"
+								value="#{adminStud}" />
+							<f:setPropertyActionListener
+								target="#{admin.selectedStudentPetition}" value="#{studPeti}" />
+						</p:commandLink>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{adminStud.sid}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{adminStud.student_Fname}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{adminStud.student_LName}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{adminStud.college_name}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{studPeti.petition_Status}" />
+					</p:column>
+				</p:subTable>
+
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
